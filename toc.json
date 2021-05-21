@@ -9,6 +9,11 @@
       "type": "divider",
       "title": "Player"
     },
+     {
+      "type": "item",
+      "title": "Video Player Overview",
+      "uri": "docs/Video-Player-Overview.md"
+    },
     {
       "type": "item",
       "title": "Player Flashvars",
@@ -23,11 +28,6 @@
       "type": "item",
       "title": "Retrieving a Manifest for native-player Implmentations",
       "uri": "docs/Retrieving-a-Manifest-for-native-player.md"
-    },
-    {
-      "type": "item",
-      "title": "Video Player Overview",
-      "uri": "docs/Video-Player-Overview.md"
-    }
+    }   
   ]
 }
