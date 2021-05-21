@@ -1,0 +1,55 @@
+# Retrieving a Manifest for native-player Implmentations
+
+## Introduction
+For platforms that cannot utilise the StreamAMG web player or the IOS/Android Mobile SDK, a manifest can be retireved via the api for use within the Native player solution of the application. 
+
+## Retrieve a M3u8 Manifest
+Running the below url structure will result in the relevant  m3u8 manifest being delivered for consumption by the native player.
+```
+https://open.http.mp.streamamg.com/p/<PARTNERID>/sp/<PARTNERID>00/playManifest/entryId/<ENTRYID>/format/applehttp/protocol/https/a.m3u8?ks=<KSessiontoken>
+```
+### VOD (video on demand) manifest structure and response
+
+Once unfurled
+
+Video Chunks are subsequntially delivered via AWS cloudfront 
+
+https://cf.vod.mp.streamamg.com/vod/_definst_/s3/101/20210520/0/0_pr3qvi2e_0_1fbv5ffx_2.mp4/chunklist.m3u8?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZi52b2QubXAuc3RyZWFtYW1nLmNvbS92b2QvX2RlZmluc3RfL3MzLzEwMS8yMDIxMDUyMC8wLzBfcHIzcXZpMmVfMF8xZmJ2NWZmeF8yLm1wNC9jaHVua2xpc3QubTN1OCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTYyMTU5OTQ4Mn19fV19&Signature=XWpiuLaE83zdYwsiwX-cY91wLGI21FBuDTckoRvvfZS7HJiqTnMaFznGjRj1~5so6EWqgJuvaVX6PtbPHA58fbNpdPBae68aRXG48TNtqVS6lvJm7qCf~qyMO-nTB3gsyDruTKvP4tzNIrSYSHWme4WlfQsLofTXkQ0mBO0y~lCxOd9~jXuRqzTsbj3catv-E2zOMMg4s2EvjMfQxIfnHie8wGBKQDbQ4tV0Q8USl-iIiniynMUo9GQHdX68jaGGQWEolDKroszLouH8t4a8VyUSUJMZJergpYwwxvpjsLd7VSN~lx89IIY4Gfigq5aIisn0W7scZa46UN~rx6CdrA__&Key-Pair-Id=APKAJVKZD2WR75FL2ZUQ 
+
+Example manifest content
+```json
+#EXTM3U
+#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=481280,RESOLUTION=480x272
+https://cf.vod.mp.streamamg.com/vod/_definst_/s3/101/20210520/0/0_pr3qvi2e_0_m3vcmbpm_2.mp4/chunklist.m3u8?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZi52b2QubXAuc3RyZWFtYW1nLmNvbS92b2QvX2RlZmluc3RfL3MzLzEwMS8yMDIxMDUyMC8wLzBfcHIzcXZpMmVfMF9tM3ZjbWJwbV8yLm1wNC9jaHVua2xpc3QubTN1OCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTYyMTU5OTQ4Mn19fV19&Signature=ZsbeSWkfsXmbo26HveGGnwK5CZ5kTd9iZvql5KshXaVVV~arcF4NrygNNBtw7rom6Usuh6gabloD-gPVlqxxKuSxKpmWDYsrBEgzwLrzURYpPMxqYl2tHLqyStZddooUQxM44nv2bI55K1HpuNLdQsI-UH-OBm1jiG7T8skznzq~S52wafkqVfaGV9649kb-qPQ4cY03bvj96ZLwB1tzJbxyFbOej~WZPi5lTreErRS9k5Tn4h~fJIMkR~yc5ZjHcjgg3lLskwmsoYfh96tER03wfBw496zJDXIVn8oEqVyLimoS3D-gtk24Y6rsrU3uDVnt~~NzvVHlbqzlfNpZtg__&Key-Pair-Id=APKAJVKZD2WR75FL2ZUQ
+#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=987136,RESOLUTION=640x360
+https://cf.vod.mp.streamamg.com/vod/_definst_/s3/101/20210520/0/0_pr3qvi2e_0_tib4hebb_2.mp4/chunklist.m3u8?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZi52b2QubXAuc3RyZWFtYW1nLmNvbS92b2QvX2RlZmluc3RfL3MzLzEwMS8yMDIxMDUyMC8wLzBfcHIzcXZpMmVfMF90aWI0aGViYl8yLm1wNC9jaHVua2xpc3QubTN1OCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTYyMTU5OTQ4Mn19fV19&Signature=UICvQpXlsFL5PvNYxAMVQOmzsF0oylP2eQPUxY7VIZTs6OHDER85N1WUd9Pdn5xFLeMsnBmUV4CAaTBxEQVonrdIW3Kl7V9RHnSN4I~IGtnGtbD6aDbdmkIkUycTJc8BoL4i92yjmhjtYc9AVdgPdro611Miyu161VxF4I0WEhuqGQceMuiTvUXyK~LVm~~m7dYY-RnGwYDA8VX3egbM~a2wQq2CjIW7~VZQRCLukuELVSQg2sDpkx6opriS3nyQPBTPu6g5GSalk~xgEH7Xr6Tz~Pbb0Kqc2~FfMIVXTxgyjGXU~A19CGiQ5zyOUCfAnQ1ZHq0zCNK3U1aOZjD4LA__&Key-Pair-Id=APKAJVKZD2WR75FL2ZUQ
+#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=1544192,RESOLUTION=1024x576
+https://cf.vod.mp.streamamg.com/vod/_definst_/s3/101/20210520/0/0_pr3qvi2e_0_1fbv5ffx_2.mp4/chunklist.m3u8?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZi52b2QubXAuc3RyZWFtYW1nLmNvbS92b2QvX2RlZmluc3RfL3MzLzEwMS8yMDIxMDUyMC8wLzBfcHIzcXZpMmVfMF8xZmJ2NWZmeF8yLm1wNC9jaHVua2xpc3QubTN1OCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTYyMTU5OTQ4Mn19fV19&Signature=XWpiuLaE83zdYwsiwX-cY91wLGI21FBuDTckoRvvfZS7HJiqTnMaFznGjRj1~5so6EWqgJuvaVX6PtbPHA58fbNpdPBae68aRXG48TNtqVS6lvJm7qCf~qyMO-nTB3gsyDruTKvP4tzNIrSYSHWme4WlfQsLofTXkQ0mBO0y~lCxOd9~jXuRqzTsbj3catv-E2zOMMg4s2EvjMfQxIfnHie8wGBKQDbQ4tV0Q8USl-iIiniynMUo9GQHdX68jaGGQWEolDKroszLouH8t4a8VyUSUJMZJergpYwwxvpjsLd7VSN~lx89IIY4Gfigq5aIisn0W7scZa46UN~rx6CdrA__&Key-Pair-Id=APKAJVKZD2WR75FL2ZUQ
+#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2691072,RESOLUTION=1280x720
+https://cf.vod.mp.streamamg.com/vod/_definst_/s3/101/20210520/0/0_pr3qvi2e_0_0k4qdic0_2.mp4/chunklist.m3u8?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZi52b2QubXAuc3RyZWFtYW1nLmNvbS92b2QvX2RlZmluc3RfL3MzLzEwMS8yMDIxMDUyMC8wLzBfcHIzcXZpMmVfMF8wazRxZGljMF8yLm1wNC9jaHVua2xpc3QubTN1OCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTYyMTU5OTQ4Mn19fV19&Signature=dukmw36-2JFW6ReKpogrKwSnRsUGNqIF5nKWt~lwUQc7IOzOBWC6qtyuFOoBWe3aQZumke7De2y9en7z2dvJlCKMe-97Qzudi3BBql1TCeWwK3AfJyqbzvhUfmf3iI-gGxC4hvY7HKo23soKm8lapjcas-a4T1aTyZdGOh3kKKOfQCzcc1isyhRYkjRB4Ii8vxd2gRF2kesiQuYczO3FX~qIm8XxhASvWnBmxkydPxeNgwVNzca-PbIx97P1RIwKJ8t5YPl4gTpS33ne4Mh4EDnFjViBrmsrX1zVNODRQgBoducTbpXHOT7a0qtKeYAtqYrjh3Iwcb7lr2Ef49XCdA__&Key-Pair-Id=APKAJVKZD2WR75FL2ZUQ
+#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=4227072,RESOLUTION=1920x1080
+https://cf.vod.mp.streamamg.com/vod/_definst_/s3/101/20210520/0/0_pr3qvi2e_0_bbtmhzh9_2.mp4/chunklist.m3u8?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZi52b2QubXAuc3RyZWFtYW1nLmNvbS92b2QvX2RlZmluc3RfL3MzLzEwMS8yMDIxMDUyMC8wLzBfcHIzcXZpMmVfMF9iYnRtaHpoOV8yLm1wNC9jaHVua2xpc3QubTN1OCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTYyMTU5OTQ4Mn19fV19&Signature=O-oyBPPaJBWOcsZTF7f3by4tLvI1QCLfRlCEf651rruBDxrtBPnbNz7bdEjxbfSrv8XNxuFnjpteTQiRAVMBTO05tJbvl37azsm0QrJWyqXCMWzt-Jsz4nDNTaTQSsw3OQL7BUm6W1wmEY3a9-0DvqnwscYaPyVrSs-epmDmHrJ0j6ezc22gpvi26bnC4Qt0o9USP9ucmfNVH6CyCgeNxHTWTiMzXzNNc~pTYfeMzT735Q7b5EmOWUmCngHyX5YUx9o-hAcSp3vf3l31WHJUJmt2Y1Efx4BwloKNaju~CODbEauJoH2KDVvGB1qezDhOu7BOgOEWOCT450Nkosb1eg__&Key-Pair-Id=APKAJVKZD2WR75FL2ZUQ
+```
+
+### Live Stream manifest structure and response
+
+Livee streams are unfurled as a master m3u8 akamai url 
+
+https://streamamghdl-lh.akamaihd.net/i/04mlp055k_1@113992/master.m3u8?hdnea=st=1621596411~exp=1621596531~acl=/i/04mlp055k_1@113992*~hmac=434238166a9040863fd447000289abbfc6137cb6dd69bfdd4d820953c04fd9bf
+
+Subsequent video chunks are delivered in the following format
+
+https://streamamghdl-lh.akamaihd.net/i/04mlp055k_1@113992/index_1_av-p.m3u8?sd=10&rebase=on&hdntl=exp=1621682811~acl=%2fi%2f04mlp055k_1%40113992*~data=hdntl~hmac=5be68e09da373d24eb25b7a5e1304d15bbe0b0544a47ac8a71172df1c9d516f6 
+```json
+#EXTM3U
+#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=857000,RESOLUTION=640x360,CODECS="avc1.77.30, mp4a.40.2"
+https://streamamghdl-lh.akamaihd.net/i/04mlp055k_1@113992/index_4_av-p.m3u8?sd=10&rebase=on&hdntl=exp=1621682811~acl=%2fi%2f04mlp055k_1%40113992*~data=hdntl~hmac=5be68e09da373d24eb25b7a5e1304d15bbe0b0544a47ac8a71172df1c9d516f6
+#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=1589000,RESOLUTION=854x480,CODECS="avc1.77.30, mp4a.40.2"
+https://streamamghdl-lh.akamaihd.net/i/04mlp055k_1@113992/index_3_av-p.m3u8?sd=10&rebase=on&hdntl=exp=1621682811~acl=%2fi%2f04mlp055k_1%40113992*~data=hdntl~hmac=5be68e09da373d24eb25b7a5e1304d15bbe0b0544a47ac8a71172df1c9d516f6
+#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=4031000,RESOLUTION=1920x1080,CODECS="avc1.77.30, mp4a.40.2"
+https://streamamghdl-lh.akamaihd.net/i/04mlp055k_1@113992/index_1_av-p.m3u8?sd=10&rebase=on&hdntl=exp=1621682811~acl=%2fi%2f04mlp055k_1%40113992*~data=hdntl~hmac=5be68e09da373d24eb25b7a5e1304d15bbe0b0544a47ac8a71172df1c9d516f6
+```
+
+## Retrieve a Dash Manifest
+
+Where applicable there may be an MPEG varient of a video file availaible for consumption, please speak to your account manager for further details.
