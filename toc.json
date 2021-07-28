@@ -1,44 +1,41 @@
 {
-  "items": [
-    {
-      "type": "item",
-      "title": "Introduction",
-      "uri": "docs/Introduction.md"
-    },
-    {
-      "type": "divider",
-      "title": "Player"
-    },
-     {
-      "type": "item",
-      "title": "Video Player Overview",
-      "uri": "docs/Video-Player-Overview.md"
-    },
-    {
-      "type": "item",
-      "title": "Player Flashvars",
-      "uri": "docs/Flashvars.md"
-    },
-    {
-      "type": "item",
-      "title": "Generating a Ksession (KS)",
-      "uri": "docs/Generating-a-Ksession.md"
-    },
-    {
-      "type": "item",
-      "title": "Retrieving a Manifest for native-player Implmentations",
-      "uri": "docs/Retrieving-a-Manifest-for-native-player.md"
-    },   
-    {
-      "type": "group",
-      "title": "SDK",
-      "items": [
-        {
-          "type": "item",
-          "title": "JAVA",
-          "uri": "docs/SDK/Java.md"
-        }
-      ]
-    },
-  ]
+	"items": [{
+			"type": "item",
+			"title": "Introduction",
+			"uri": "docs/Introduction.md"
+		},
+		{
+			"type": "divider",
+			"title": "Player"
+		},
+		{
+			"type": "item",
+			"title": "Video Player Overview",
+			"uri": "docs/Video-Player-Overview.md"
+		},
+		{
+			"type": "item",
+			"title": "Player Flashvars",
+			"uri": "docs/Flashvars.md"
+		},
+		{
+			"type": "item",
+			"title": "Generating a Ksession (KS)",
+			"uri": "docs/Generating-a-Ksession.md"
+		},
+		{
+			"type": "item",
+			"title": "Retrieving a Manifest for native-player Implmentations",
+			"uri": "docs/Retrieving-a-Manifest-for-native-player.md"
+		},
+		{
+			"type": "group",
+			"title": "SDK",
+			"items": [{
+				"type": "item",
+				"title": "JAVA",
+				"uri": "docs/SDK/Java.md"
+			}]
+		}
+	]
 }
