@@ -2,8 +2,7 @@ The following helper function can be used in Java to generate a kSession Token s
 
 Simply copy the following class into Java Project. 
 
-
-\```java
+```java
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -61,4 +60,4 @@ public class KSessionHelper {
     }
 }
 
-\```
+```
