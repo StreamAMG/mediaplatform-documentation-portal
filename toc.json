@@ -28,6 +28,10 @@
 			"title": "Retrieving a Manifest for native-player Implmentations",
 			"uri": "docs/Retrieving-a-Manifest-for-native-player.md"
 		},
+    {
+      "type": "divider",
+      "title": "API Reference"
+    },
 		{
 			"type": "group",
 			"title": "SDK",
