@@ -1,4 +1,4 @@
-The following helper function can be used in Java to generate a kSession Token so a client can access MediaPlatform Content.
+The following helper function can be used in Java to generate a KSession Token. This Token can then be used to access MediaPlatform Content.
 
 Simply copy the following class into Java Project. 
 
