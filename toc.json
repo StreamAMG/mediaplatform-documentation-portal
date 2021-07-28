@@ -34,7 +34,7 @@
 			"items": [{
 				"type": "item",
 				"title": "Java",
-				"uri": "SDK/Java.md"
+				"uri": "docs/SDK/Java.md"
 			}]
 		}
 	]
