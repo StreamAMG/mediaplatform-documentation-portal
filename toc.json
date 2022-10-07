@@ -40,6 +40,15 @@
 				"title": "Java",
 				"uri": "docs/sdk/Java.md"
 			}]
+		},
+		{
+			"type": "group",
+			"title": "DRM",
+			"items": [{
+				"type": "item",
+				"title": "Validate an entry for a customer",
+				"uri": "docs/drm/validatedrm.yaml"
+			}]
 		}
 	]
 }
