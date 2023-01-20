@@ -8,7 +8,7 @@ info:
     The following API Specification outlines the external API access points for the DRM application.
 
     The resources within this document provide examples of requests and responses to help development teams with DRM Integration.
-  version: 1.0.0
+  version: 1.1.0
 tags:
   - name: DRM API
 paths:
@@ -51,7 +51,14 @@ paths:
               type: string
               example: 0_s5sds0sd
             required: true
-            description: The entry ID    
+            description: The entry ID
+          - in: query
+            name: ks
+            schema:
+              type: string
+              example: OWI4MGU0M2U5MmM1ZDhjOTM5Zjg5ZDliZTYzZDQ5NGI5MjM1NGFhMXwzMDAwNjY4OzMwMDA2Njg7MTY3NDIyNzkwMDswOzE2NzQyMjc2MDA7Vmlld2VyO3N2aWV3OjBfN3VuejIydHQsc2V0cm9sZTpQTEFZQkFDS19CQVNFX1JPTEUsd2lkZ2V0OjE7Ow==
+            required: true
+            description: The customer ksession      
           - in: query
             name: wlv
             schema:
@@ -87,7 +94,7 @@ paths:
 
           Here is an example of the EZDRM return post to your auth URL: https://Your_URL.com/auth?IP=10.10.10.10&token=5060ac27-52a7-0151-2bc4- da9055cb0afb&CustomData=samplecustomdata    
 
-          Example of request /check-entitlement-playready?izsession=850887a3-1c8e-48b5-bfcc-f62161581f72&IP=127.1.0.0&partner_id=999999999&entry_id=0_u5m5geop&wlv=123456&token=1234  
+          Example of request /check-entitlement-playready?izsession=850887a3-1c8e-48b5-bfcc-f62161581f72&IP=127.1.0.0&partner_id=999999999&entry_id=0_u5m5geop&wlv=123456&token=1234&ks=OWI4MGU0M2U5MmM1ZDhjOTM5Zjg5ZDliZTYzZDQ5NGI5MjM1NGFhMXwzMDAwNjY4OzMwMDA2Njg7MTY3NDIyNzkwMDswOzE2NzQyMjc2MDA7Vmlld2VyO3N2aWV3OjBfN3VuejIydHQsc2V0cm9sZTpQTEFZQkFDS19CQVNFX1JPTEUsd2lkZ2V0OjE7Ow==
         operationId: drm-api-check-entitlement-playready
         tags:
           - DRM
@@ -124,7 +131,14 @@ paths:
             type: string
             example: 0_s5sds0sd
           required: true
-          description: The entry ID   
+          description: The entry ID  
+        - in: query
+          name: ks
+          schema:
+            type: string
+            example: OWI4MGU0M2U5MmM1ZDhjOTM5Zjg5ZDliZTYzZDQ5NGI5MjM1NGFhMXwzMDAwNjY4OzMwMDA2Njg7MTY3NDIyNzkwMDswOzE2NzQyMjc2MDA7Vmlld2VyO3N2aWV3OjBfN3VuejIydHQsc2V0cm9sZTpQTEFZQkFDS19CQVNFX1JPTEUsd2lkZ2V0OjE7Ow==
+          required: true
+          description: The customer ksession
         - in: query
           name: wlv
           schema:
@@ -160,7 +174,7 @@ paths:
 
         Here is an example of the EZDRM return post to your Authorization URL: https://fps.ezdrm.com/api/licenses/09cc0377-6dd4-40cb-b09d-XXXXXXXX?customdata=123?customdata=345&ClientIP=12.34.567.89
 
-        Example of request /check-entitlement-fairplay?izsession=850887a3-1c8e-48b5-bfcc-f62161581f72&ClientIP=127.1.0.0&partner_id=999999999&entry_id=0_u5m5geop
+        Example of request /check-entitlement-fairplay?izsession=850887a3-1c8e-48b5-bfcc-f62161581f72&ClientIP=127.1.0.0&partner_id=999999999&entry_id=0_u5m5geop&ks=OWI4MGU0M2U5MmM1ZDhjOTM5Zjg5ZDliZTYzZDQ5NGI5MjM1NGFhMXwzMDAwNjY4OzMwMDA2Njg7MTY3NDIyNzkwMDswOzE2NzQyMjc2MDA7Vmlld2VyO3N2aWV3OjBfN3VuejIydHQsc2V0cm9sZTpQTEFZQkFDS19CQVNFX1JPTEUsd2lkZ2V0OjE7Ow==
       operationId: drm-api-check-entitlement-fairplay
       tags:
         - DRM
@@ -199,6 +213,13 @@ paths:
           required: true
           description: The entry ID   
         - in: query
+          name: ks
+          schema:
+            type: string
+            example: OWI4MGU0M2U5MmM1ZDhjOTM5Zjg5ZDliZTYzZDQ5NGI5MjM1NGFhMXwzMDAwNjY4OzMwMDA2Njg7MTY3NDIyNzkwMDswOzE2NzQyMjc2MDA7Vmlld2VyO3N2aWV3OjBfN3VuejIydHQsc2V0cm9sZTpQTEFZQkFDS19CQVNFX1JPTEUsd2lkZ2V0OjE7Ow==
+          required: true
+          description: The customer ksession
+        - in: query
           name: wlv
           schema:
             type: string
@@ -235,7 +256,7 @@ paths:
 
         You can find and edit your authorization URL by logging into your EZDRM account, under “My Account” click on the link to My Widevine Account under Widevine DRM
 
-        Example of request: /check-entitlement-widevine?izsession=850887a3-1c8e-48b5-bfcc-f62161581f72&client_ip=127.1.0.0&partner_id=999999999&entry_id=0_u5m5geop&wlv=123456&response={ "client_ip": "test" }
+        Example of request: /check-entitlement-widevine?izsession=850887a3-1c8e-48b5-bfcc-f62161581f72&client_ip=127.1.0.0&partner_id=999999999&entry_id=0_u5m5geop&ks=OWI4MGU0M2U5MmM1ZDhjOTM5Zjg5ZDliZTYzZDQ5NGI5MjM1NGFhMXwzMDAwNjY4OzMwMDA2Njg7MTY3NDIyNzkwMDswOzE2NzQyMjc2MDA7Vmlld2VyO3N2aWV3OjBfN3VuejIydHQsc2V0cm9sZTpQTEFZQkFDS19CQVNFX1JPTEUsd2lkZ2V0OjE7Ow==&wlv=123456&response={ "client_ip": "test" }
       operationId: drm-api-check-entitlement-widevine
       tags:
         - DRM
