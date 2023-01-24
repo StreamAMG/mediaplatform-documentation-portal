@@ -1,0 +1,263 @@
+x-stoplight:
+  docs:
+    showModels: false
+openapi: 3.0.3
+info:
+  title: DRM API Specification
+  description: |
+    The following API Specification outlines the external API access points for the DRM application.
+
+    The resources within this document provide examples of requests and responses to help development teams with DRM Integration.
+  version: 1.1.0
+tags:
+  - name: DRM API
+paths:
+  /check-entitlement-playready:
+      get:
+        summary: Microsoft  PlayReady
+        x-internal: true
+        parameters:
+          - in: query
+            name: izsession
+            schema:
+              type: string
+              example: 
+            required: true
+            description: izsession
+          - in: query
+            name: IP
+            schema:
+              type: string
+              example: 10.10.10.10
+            required: true
+            description: The IP address of the end client 
+          - in: query
+            name: token
+            schema:
+              type: string
+              example: '5060ac27-52a7-0151-2bc4-da9055cb0afb'
+            required: true
+            description: EZDRM TOKEN, this is for EZDRM use only
+          - in: query
+            name: partner_id
+            schema:
+              type: number
+              example: 30001234
+            required: true
+            description: The partner ID
+          - in: query
+            name: entry_id
+            schema:
+              type: string
+              example: 0_s5sds0sd
+            required: true
+            description: The entry ID
+          - in: query
+            name: ks
+            schema:
+              type: string
+              example: OWI4MGU0M2U5MmM1ZDhjOTM5Zjg5ZDliZTYzZDQ5NGI5MjM1NGFhMXwzMDAwNjY4OzMwMDA2Njg7MTY3NDIyNzkwMDswOzE2NzQyMjc2MDA7Vmlld2VyO3N2aWV3OjBfN3VuejIydHQsc2V0cm9sZTpQTEFZQkFDS19CQVNFX1JPTEUsd2lkZ2V0OjE7Ow==
+            required: true
+            description: The customer ksession      
+          - in: query
+            name: wlv
+            schema:
+              type: string
+              example: '5a47e821-ce96-41fa-9cde-81ec7fff303b' 
+            required: false
+            description: whitelist    
+        responses:
+          '200':
+            description: Successful Response
+            content:
+              text/plain:
+                schema:
+                  type: string
+                  example: play=true or p1=5&p2=&p3=&p4=0&p5=0&p6=1&p7=0&p8=0&p9=300&token={token} ??
+          '500':
+            description: Unsuccessful response
+            content:
+              text/plain:
+                schema:
+                  type: string
+                  example: play=false
+        description: |-
+          The EZDRM system passes several values by default to your authorization URL: 
+
+          The IP address of the end client 
+
+          EZDRM TOKEN, this is for EZDRM use only 
+
+          PX value, this is your EZDRM specific PX value for your account 
+
+          Custom Data is added to the end of the string (see next section) 
+
+          Here is an example of the EZDRM return post to your auth URL: https://Your_URL.com/auth?IP=10.10.10.10&token=5060ac27-52a7-0151-2bc4- da9055cb0afb&CustomData=samplecustomdata    
+
+          Example of request /check-entitlement-playready?izsession=850887a3-1c8e-48b5-bfcc-f62161581f72&IP=127.1.0.0&partner_id=999999999&entry_id=0_u5m5geop&wlv=123456&token=1234&ks=OWI4MGU0M2U5MmM1ZDhjOTM5Zjg5ZDliZTYzZDQ5NGI5MjM1NGFhMXwzMDAwNjY4OzMwMDA2Njg7MTY3NDIyNzkwMDswOzE2NzQyMjc2MDA7Vmlld2VyO3N2aWV3OjBfN3VuejIydHQsc2V0cm9sZTpQTEFZQkFDS19CQVNFX1JPTEUsd2lkZ2V0OjE7Ow==
+        operationId: drm-api-check-entitlement-playready
+        tags:
+          - DRM
+      parameters: []
+  /check-entitlement-fairplay:
+    get:
+      summary: Apple FairPlay
+      x-internal: true
+      parameters:
+        - in: query
+          name: izsession
+          schema:
+            type: string
+            example: 
+          required: true
+          description: izsession
+        - in: query
+          name: ClientIP
+          schema:
+            type: string
+            example: 10.10.10.10
+          required: true
+          description: The IP address of the end client
+        - in: query
+          name: partner_id
+          schema:
+            type: number
+            example: 30001234
+          required: true
+          description: The partner ID
+        - in: query
+          name: entry_id
+          schema:
+            type: string
+            example: 0_s5sds0sd
+          required: true
+          description: The entry ID  
+        - in: query
+          name: ks
+          schema:
+            type: string
+            example: OWI4MGU0M2U5MmM1ZDhjOTM5Zjg5ZDliZTYzZDQ5NGI5MjM1NGFhMXwzMDAwNjY4OzMwMDA2Njg7MTY3NDIyNzkwMDswOzE2NzQyMjc2MDA7Vmlld2VyO3N2aWV3OjBfN3VuejIydHQsc2V0cm9sZTpQTEFZQkFDS19CQVNFX1JPTEUsd2lkZ2V0OjE7Ow==
+          required: true
+          description: The customer ksession
+        - in: query
+          name: wlv
+          schema:
+            type: string
+            example: '5a47e821-ce96-41fa-9cde-81ec7fff303b' 
+          required: false
+          description: whitelist 
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: play=true
+        '500':
+          description: Unsuccessful response
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: play=false
+      description: |-
+        The EZDRM system passes several values by default to your Authorization URL: 
+
+        The FPS License Server Path 
+
+        AssetID – changes per the asset; the AssetID is generated during DRM key generation. Asset IDs can be found under FairPlay DRM in your EZDRM account by date created. 
+
+        Custom Data values 
+
+        The Client IP of the end client is added to the end of the string 
+
+        Here is an example of the EZDRM return post to your Authorization URL: https://fps.ezdrm.com/api/licenses/09cc0377-6dd4-40cb-b09d-XXXXXXXX?customdata=123?customdata=345&ClientIP=12.34.567.89
+
+        Example of request /check-entitlement-fairplay?izsession=850887a3-1c8e-48b5-bfcc-f62161581f72&ClientIP=127.1.0.0&partner_id=999999999&entry_id=0_u5m5geop&ks=OWI4MGU0M2U5MmM1ZDhjOTM5Zjg5ZDliZTYzZDQ5NGI5MjM1NGFhMXwzMDAwNjY4OzMwMDA2Njg7MTY3NDIyNzkwMDswOzE2NzQyMjc2MDA7Vmlld2VyO3N2aWV3OjBfN3VuejIydHQsc2V0cm9sZTpQTEFZQkFDS19CQVNFX1JPTEUsd2lkZ2V0OjE7Ow==
+      operationId: drm-api-check-entitlement-fairplay
+      tags:
+        - DRM
+    parameters: []
+  /check-entitlement-widevine:
+    get:
+      summary: Google Widevine
+      x-internal: true
+      parameters:
+        - in: query
+          name: izsession
+          schema:
+            type: string
+            example: 
+          required: true
+          description: izsession
+        - in: query
+          name: response
+          schema:
+            type: object
+            example: { "client_ip": "10.10.10.10" }
+          required: true
+          description: an object contains client_ip
+        - in: query
+          name: partner_id
+          schema:
+            type: number
+            example: 30001234
+          required: true
+          description: The partner ID
+        - in: query
+          name: entry_id
+          schema:
+            type: string
+            example: 0_s5sds0sd
+          required: true
+          description: The entry ID   
+        - in: query
+          name: ks
+          schema:
+            type: string
+            example: OWI4MGU0M2U5MmM1ZDhjOTM5Zjg5ZDliZTYzZDQ5NGI5MjM1NGFhMXwzMDAwNjY4OzMwMDA2Njg7MTY3NDIyNzkwMDswOzE2NzQyMjc2MDA7Vmlld2VyO3N2aWV3OjBfN3VuejIydHQsc2V0cm9sZTpQTEFZQkFDS19CQVNFX1JPTEUsd2lkZ2V0OjE7Ow==
+          required: true
+          description: The customer ksession
+        - in: query
+          name: wlv
+          schema:
+            type: string
+            example: '5a47e821-ce96-41fa-9cde-81ec7fff303b' 
+          required: false
+          description: whitelist
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: play=true
+        '500':
+          description: Unsuccessful response
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: play=false
+      description: |-
+        The EZDRM system passes several values by default to your Authorization URL: 
+
+        - Client_ip of the end client 
+
+        - pX is your EZDRM specific PX value for your account 
+
+        - Custom Data is added to the end of the string (this will be described in more detail in the next section) 
+
+        Here is an example of the EZDRM return post to your Authorization URL: 
+
+        https://AUTHUTRL/PlayValue.asp?p1=1&response={"status":"OK","supported_tracks ":[],"internal_status":127,"client_info":[],"done","client_ip":"46.200.40.005"}&pX=XXX XXX&CustomData=123
+
+        You can find and edit your authorization URL by logging into your EZDRM account, under “My Account” click on the link to My Widevine Account under Widevine DRM
+
+        Example of request: /check-entitlement-widevine?izsession=850887a3-1c8e-48b5-bfcc-f62161581f72&client_ip=127.1.0.0&partner_id=999999999&entry_id=0_u5m5geop&ks=OWI4MGU0M2U5MmM1ZDhjOTM5Zjg5ZDliZTYzZDQ5NGI5MjM1NGFhMXwzMDAwNjY4OzMwMDA2Njg7MTY3NDIyNzkwMDswOzE2NzQyMjc2MDA7Vmlld2VyO3N2aWV3OjBfN3VuejIydHQsc2V0cm9sZTpQTEFZQkFDS19CQVNFX1JPTEUsd2lkZ2V0OjE7Ow==&wlv=123456&response={ "client_ip": "test" }
+      operationId: drm-api-check-entitlement-widevine
+      tags:
+        - DRM
+    parameters: []      
